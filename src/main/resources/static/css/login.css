@@ -1,0 +1,60 @@
+/* Общий стиль для всей страницы */
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    text-align: center;
+    background-color: #acd3fa; /* Измените цвет фона */
+    margin: 0; /* Уберите отступы на странице */
+    padding: 0;
+}
+
+h1 {
+    color: #333;
+    font-size: 24px; /* Измените размер шрифта */
+}
+
+/* Стили для формы */
+form {
+    width: 100%;
+    max-width: 600px; /* Увеличьте максимальную ширину формы */
+    margin: 20px auto;
+    background-color: #429bf5; /* Добавьте фоновый цвет для формы */
+    padding: 20px; /* Добавьте внутренний отступ для формы */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Добавьте тень для формы */
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px 0 10px 0;
+    margin: 5px auto; /* Увеличьте вертикальный отступ между полями */
+    border: 2px solid #ccc; /* Увеличьте ширину границы */
+    border-radius: 5px;
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px; /* Добавьте верхний отступ */
+}
+
+input[type="submit"]:hover {
+    background-color: #02f517;
+}
+
+/* Стили для информационных сообщений */
+div {
+    color: green; /* Измените цвет текста сообщений */
+    font-weight: normal; /* Уберите жирный шрифт */
+    margin-top: 10px;
+    padding: 5px; /* Добавьте внутренний отступ */
+    background-color: #e0e0e0; /* Добавьте фоновый цвет для сообщений */
+    border: 1px solid #ccc; /* Добавьте границу */
+    border-radius: 5px;
+    text-align: center; /* Выравнивание текста влево */
+}

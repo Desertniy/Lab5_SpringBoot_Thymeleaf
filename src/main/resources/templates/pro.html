@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <meta name="_csrf" th:content="${_csrf.token}">
+    <meta name="_csrf_header" th:content="${_csrf.headerName}">
+    <title>Properties</title>
+</head>
+<body>
+    <div class="menu_bar">
+        <p>Properties menu</p>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
+    <div class="main_tool">
+        <table id="table_of_objects">
+            <thead>
+            <tr>
+                <th>Адрес</th>
+                <th>Срок аренды</th>
+                <th>Цена</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pr : ${properties}">
+                <td th:text="${pr.street}"></td>
+                <td th:text="${pr.price}"></td>
+                <td th:text="${pr.monthlyRent}"></td>
+            </tr>
+            </tbody>
+        </table>
+        <form th:action="@{/property}" th:object="${property}" method="post">
+            <p>Добавить объект</p>
+            <input type="text" th:field="*{street}" required placeholder="Введите адрес"/>
+            <input type="text"  th:field="*{monthlyRent}" required placeholder="Введите срок аренды"/>
+            <input type="text" th:field="*{price}" required placeholder="Введите стоимость"/>
+            <input type="submit"/>
+            <div th:if="${error}">
+                <p>Такой объект существует</p>
+            </div>
+        </form>
+       <!-- <form id="del_obj">
+            <p>Удалить объект</p>
+            <input type="text" id="addres_del" name="address" required placeholder="Введите адрес">
+            <input type="submit">
+        </form>
+        <form id="get_obj">
+            <p>Найти объект</p>
+            <input type="text" id="addres_get" name="address" required placeholder="Введите адрес">
+            <input type="submit">
+        </form>
+        <form id="put_obj">
+            <p>Изменить стоимость и срок съема объекта недвижимости по улице</p>
+            <input type="text" id="addres_put" name="address" required placeholder="Введите адрес">
+            <input type="text" id="rental_period_put" name="monthlyRent" required placeholder="Введите срок аренды">
+            <input type="text" id="price_put" name="price" required placeholder="Введите стоимость">
+            <input type="submit">
+        </form>-->
+    </div>
+</body>
+</html>

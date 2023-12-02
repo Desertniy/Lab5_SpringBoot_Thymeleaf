@@ -1,0 +1,73 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <title>Properties</title>
+</head>
+<body>
+<div class="menu_bar">
+    <p th:text="#{prop_menu}"></p>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" th:value="#{sign_out}"/>
+    </form>
+</div>
+<div class="main_tool">
+    <table id="table_of_objects">
+        <thead>
+        <tr>
+            <th th:text="#{addres}"></th>
+            <th th:text="#{rent}"></th>
+            <th th:text="#{price}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pr : ${properties}">
+            <td th:text="${pr.street}"></td>
+            <td th:text="${pr.monthlyRent}"></td>
+            <td th:text="${pr.price}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div sec:authorize="hasRole('ADMIN')">
+        <form th:action="@{/property}" th:object="${property}" method="post">
+            <p th:text="#{add}"></p>
+            <input type="text" th:field="*{street}" required th:placeholder="#{place_addres}"/>
+            <input type="text"  th:field="*{monthlyRent}" required th:placeholder="#{place_rent}"/>
+            <input type="text" th:field="*{price}" required th:placeholder="#{place_price}"/>
+            <input type="submit"/>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        </form>
+        <form th:action="@{/delete/{street_act}}" method="post">
+            <p th:text="#{remove}"></p>
+            <input type="text"  name="street_act" th:value="${street_act}" required th:placeholder="#{place_addres}"/>
+            <input type="submit"/>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        </form>
+    </div>
+
+    <form th:action="@{/property/{street_act}}" method="get">
+        <p th:text="#{search}"></p>
+        <input type="text" name="street_act" th:value="${street_act}" required th:placeholder="#{place_addres}"/>
+        <input type="submit"/>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+    </form>
+
+    <div th:if="${property_get}">
+        <h2 th:text="#{info_object}"></h2>
+        <p> <span th:text="#{addres}"></span> <span th:text="${property_get.street}"></span></p>
+        <p> <span th:text="#{price}"></span> <span th:text="${property_get.price}"></span></p>
+        <p> <span th:text="#{rent}"></span> <span th:text="${property_get.monthlyRent}"></span></p>
+    </div>
+
+    <div sec:authorize="hasRole('ADMIN')">
+        <form th:action="@{/put}" th:object="${property}" method="post">
+            <p th:text="#{put}"></p>
+            <input type="text" th:field="*{street}" required th:placeholder="#{place_addres}"/>
+            <input type="text" th:field="*{monthlyRent}" required th:placeholder="#{place_rent}"/>
+            <input type="text" th:field="*{price}" required th:placeholder="#{place_price}"/>
+            <input type="submit"/>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        </form>
+    </div>
+</div>
+</body>
+</html>
